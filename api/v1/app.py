@@ -21,14 +21,14 @@ def teardown(exception):
     storage.close()
 
 # 404 handler
-@app.errorhandler()
+@app.errorhandler(404)
 def not_found(err):
     """
     Handles not found errors
     """
     message = {"error": "Not found"}
 
-    return jsonify(message)
+    return jsonify(message), 404
 
 
 if __name__ == "__main__":
