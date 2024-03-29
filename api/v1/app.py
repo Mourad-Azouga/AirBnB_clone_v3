@@ -2,7 +2,7 @@
 """ Flask Application """
 from models import storage
 import os
-from flask import Flask
+from flask import Flask, jsonify
 from api.v1.views import app_views
 
 # flask server environmental setup
@@ -19,6 +19,17 @@ app.register_blueprint(app_views)
 def teardown(exception):
     """After each request this method is called to close sqlalchemy"""
     storage.close()
+
+# 404 handler
+@app.errorhandler()
+def not_found():
+    """
+    Handles not found errors
+    """
+    message = "\"error\": \"Not found\""
+
+    return jsonify(message)
+
 
 if __name__ == "__main__":
     """ Run main Flask App"""
