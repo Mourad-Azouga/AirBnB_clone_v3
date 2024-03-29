@@ -22,11 +22,11 @@ def teardown(exception):
 
 # 404 handler
 @app.errorhandler()
-def not_found():
+def not_found(err):
     """
     Handles not found errors
     """
-    message = "\"error\": \"Not found\""
+    message = {"error": "Not found"}
 
     return jsonify(message)
 
